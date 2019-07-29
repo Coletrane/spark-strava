@@ -1,0 +1,39 @@
+group = "com.coleinman.spark-strava"
+version = "1.0.0"
+
+buildscript {
+    ext.kotlin_version = '1.3.21'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+}
+
+task fatJar(type: Jar) {
+    baseName = project.name + '-fat'
+    from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    manifest {
+        attributes 'Main-Class': 'de.techdev.example.SparkExampleKt'
+    }
+}
+
+build.dependsOn fatJar
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile 'com.sparkjava:spark-core:2.5.5'
+    compile 'org.slf4j:slf4j-simple:1.7.25'
+    compile 'com.h2database:h2:1.4.195'
+    compile 'com.google.code.gson:gson:2.8.0'
+}
