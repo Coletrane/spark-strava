@@ -1,14 +1,17 @@
+package jobs
+
+import util.Constants
 import org.apache.spark.sql.SparkSession
 
 /**
- * Implemenatation using DataFrame instead of RDD
+ * Implemenatation using DataFrame
  */
-object StravaImplUsingDataFrame {
+object UsingDataFrame {
     @JvmStatic
     fun main(args: Array<String>) {
         val spark = SparkSession.builder()
                 .master("local")
-                .appName(StravaImplUsingDataFrame::class.qualifiedName)
+                .appName(UsingDataFrame::class.qualifiedName)
                 .orCreate
 
         val stravaDf = spark.read()

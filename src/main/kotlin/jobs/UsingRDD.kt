@@ -1,15 +1,18 @@
+package jobs
+
+import util.Constants
 import org.apache.spark.api.java.JavaSparkContext
 import org.apache.spark.sql.SparkSession
 
 /**
- * Implemenatation using RDD instead of DataFrame
+ * Implemenatation using RDD
  */
-object StravaImplUsingRDD {
+object UsingRDD {
     @JvmStatic
     fun main(args: Array<String>) {
         val spark = SparkSession.builder()
             .master("local")
-            .appName(StravaImplUsingRDD::class.qualifiedName)
+            .appName(UsingRDD::class.qualifiedName)
             .orCreate
 
         val context = JavaSparkContext(spark.sparkContext())
