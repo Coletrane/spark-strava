@@ -1,7 +1,8 @@
 package jobs
 
-import util.Constants
+import jobs.dataframe.ParseHtmlJob
 import org.apache.spark.sql.SparkSession
+import util.STRAVA_DATA_PATH
 
 /**
  * Implemenatation using DataSet
@@ -11,13 +12,13 @@ object UsingDataSet {
     fun main(args: Array<String>) {
         val spark = SparkSession.builder()
             .master("local")
-            .appName(UsingDataFrame::class.qualifiedName)
+            .appName(ParseHtmlJob::class.qualifiedName)
             .orCreate
 
         val stravaDf = spark.read()
             .option("header", "true")
             .option("inferSchema", "true")
-            .csv(Constants.stravaCsvPath)
+            .csv(STRAVA_DATA_PATH)
         stravaDf.printSchema()
 
         spark.stop()

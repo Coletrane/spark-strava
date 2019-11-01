@@ -1,8 +1,8 @@
 package jobs
 
-import util.Constants
 import org.apache.spark.api.java.JavaSparkContext
 import org.apache.spark.sql.SparkSession
+import util.STRAVA_DATA_PATH
 
 /**
  * Implemenatation using RDD
@@ -18,7 +18,7 @@ object UsingRDD {
         val context = JavaSparkContext(spark.sparkContext())
 
         val csv = context
-            .textFile(Constants.stravaCsvPath)
+            .textFile(STRAVA_DATA_PATH)
             .map { line ->
                 line.split(",")
                     .map { element ->
