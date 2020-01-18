@@ -1,9 +1,9 @@
-package jobs.dataframe
+package suspension.dataframe
 
 import org.apache.spark.sql.SparkSession
 import scala.collection.JavaConverters
-import scala.collection.immutable.Seq
-import util.RIDES_PATH
+import util.AIR_RIDES_PATH
+import util.COIL_RIDES_PATH
 import java.io.File
 
 object ParseHtmlJob {
@@ -19,13 +19,16 @@ object ParseHtmlJob {
             .appName(ParseHtmlJob::class.qualifiedName)
             .orCreate
 
-        val ridesFiles =
-            File(RIDES_PATH)
-                .walkBottomUp()
-                .filter { it.extension == "html" }
-                .toList()
+        fun getRidesFiles(filepath: String) = File(filepath)
+            .walkBottomUp()
+            .filter { it.extension == "html" }
+            .map { it.readText() }
+            .toMutableList()
+        val ridesFiles = getRidesFiles(COIL_RIDES_PATH)
+        ridesFiles.addAll(getRidesFiles(AIR_RIDES_PATH))
 
-        val ridesDf = spark
+
+        val ridesDs = spark
             .read()
             .text(
                 JavaConverters.asScalaIteratorConverter(

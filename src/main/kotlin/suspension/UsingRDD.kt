@@ -1,4 +1,4 @@
-package jobs
+package suspension
 
 import org.apache.spark.api.java.JavaSparkContext
 import org.apache.spark.sql.SparkSession

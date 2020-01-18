@@ -1,4 +1,4 @@
-package jobs.dataframe
+package suspension.dataframe
 
 import org.apache.spark.sql.SparkSession
 

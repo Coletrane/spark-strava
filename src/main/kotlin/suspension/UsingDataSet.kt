@@ -1,6 +1,6 @@
-package jobs
+package suspension
 
-import jobs.dataframe.ParseHtmlJob
+import suspension.dataframe.ParseHtmlJob
 import org.apache.spark.sql.SparkSession
 import util.STRAVA_DATA_PATH
 
