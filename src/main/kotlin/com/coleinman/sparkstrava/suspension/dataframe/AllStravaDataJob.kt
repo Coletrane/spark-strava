@@ -1,4 +1,4 @@
-package suspension.dataframe
+package com.coleinman.sparkstrava.suspension.dataframe
 
 import org.apache.spark.sql.SparkSession
 
